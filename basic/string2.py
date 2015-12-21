@@ -17,8 +17,11 @@
 # If the string length is less than 3, leave it unchanged.
 # Return the resulting string.
 def verbing(s):
-    # +++your code here+++
-    return
+    if (len(s) > 3) and (s[-3:] != 'ing'):
+        s = s + 'ing'
+    elif (s[-3:] == 'ing'):
+        s = s + 'ly'
+    return s
 
 
 # E. not_bad
@@ -30,8 +33,12 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-    # +++your code here+++
-    return
+    a = s.find('not') # if not found the return -1
+    b = s.find('bad') # idem
+
+    if (a != -1 and b != -1 and a < b):
+        s = s.replace(s[a:(b+len('bad'))], 'good') # b recieve +3 because need to contains the 'bad' string size
+    return s
 
 
 # F. front_back
@@ -42,9 +49,27 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-    # +++your code here+++
-    return
 
+    # Code to much complex - need to be refactored
+    def isOdd(number):
+        return number % 2 != 0
+
+    def get_fb(s, front):
+        mid = int(len(s) / 2)
+        if isOdd(len(s)):
+            if front == True:
+                ext = s[:mid+1][-1:]
+                s = s[:mid] + ext
+            else:
+                s = s[mid+1:]
+        else:
+            if front == True:
+                s = s[:mid]
+            else:
+                s = s[mid:]
+        return s
+
+    return get_fb(a, True) + get_fb(b, True) + get_fb(a, False) + get_fb(b, False)
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
@@ -63,6 +88,8 @@ def main():
     test(verbing('hail'), 'hailing')
     test(verbing('swiming'), 'swimingly')
     test(verbing('do'), 'do')
+    test(verbing('ly'), 'ly')
+    test(verbing('ing'), 'ingly')
 
     print()
     print('not_bad')
@@ -70,6 +97,7 @@ def main():
     test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
     test(not_bad('This tea is not hot'), 'This tea is not hot')
     test(not_bad("It's bad yet not"), "It's bad yet not")
+    test(not_bad("You are so beautiful"), "You are so beautiful")
 
     print()
     print('front_back')
