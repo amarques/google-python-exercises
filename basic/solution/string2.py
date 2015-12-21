@@ -33,8 +33,12 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-    # +++your code here+++
-    return
+    a = s.find('not') # if not found the return -1
+    b = s.find('bad') # idem
+
+    if (a != -1 and b != -1 and a < b):
+        s = s.replace(s[a:(b+len('bad'))], 'good') # b recieve +3 because need to contains the 'bad' string size
+    return s
 
 
 # F. front_back
@@ -45,9 +49,27 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-    # +++your code here+++
-    return
 
+    # Code to much complex - need to be refactored
+    def isOdd(number):
+        return number % 2 != 0
+
+    def get_fb(s, front):
+        mid = int(len(s) / 2)
+        if isOdd(len(s)):
+            if front == True:
+                ext = s[:mid+1][-1:]
+                s = s[:mid] + ext
+            else:
+                s = s[mid+1:]
+        else:
+            if front == True:
+                s = s[:mid]
+            else:
+                s = s[mid:]
+        return s
+
+    return get_fb(a, True) + get_fb(b, True) + get_fb(a, False) + get_fb(b, False)
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
