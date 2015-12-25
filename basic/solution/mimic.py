@@ -46,9 +46,12 @@ import sys
 
 
 def mimic_dict(filename):
-  """Returns mimic dict mapping each word to list of words which follow it."""
-  # +++your code here+++
-  return
+    """Returns mimic dict mapping each word to list of words which follow it."""
+    print(filename)
+
+    f = open(filename, 'r')
+    text = f.read()
+    return print(text)
 
 
 def print_mimic(mimic_dict, word):

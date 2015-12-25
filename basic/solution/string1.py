@@ -24,12 +24,13 @@
 # So donuts(5) returns 'Number of donuts: 5'
 # and donuts(23) returns 'Number of donuts: many'
 def donuts(count):
-    if count >= 10:
+
+    if count > 9:
         tx = "many"
     else:
         tx = str(count)
-    tx = 'Number of donuts: %s' % tx
-    return tx
+
+    return 'Number of donuts: %s' % tx
 
 # B. both_ends
 # Given a string s, return a string made of the first 2
@@ -53,7 +54,8 @@ def both_ends(s):
 # Hint: s.replace(stra, strb) returns a version of string s
 # where all instances of stra have been replaced by strb.
 def fix_start(s):
-    return s[0] + s[1:].replace(s[0], '*')
+    head, rest = s[0], s[1:]
+    return head + rest.replace(head, '*')
 
 # D. MixUp
 # Given strings a and b, return a single string with a and b separated
