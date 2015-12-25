@@ -65,8 +65,13 @@ def fix_start(s):
 #   'dog', 'dinner' -> 'dig donner'
 # Assume a and b are length 2 or more.
 def mix_up(a, b):
-    return (b[:2]+a[2:]) + ' ' + (a[:2] + b[2:])
+    return '{}{} {}{}'.format(b[:2], a[2:], a[:2], b[2:])
 
+def mix_up(a, b):
+    begin = lambda s: s[:2]
+    end = lambda s: s[2:]
+
+    return ''.join([begin(b), end(a), ' ', begin(a), end(b)])
 
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
